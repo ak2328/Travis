@@ -1,15 +1,28 @@
-language: java
+sudo: required
+services:
+  - docker
+language: java:8.0
 jdk: openjdk8
-sudo: false
-script: mvn clean package
+
+before_install:
+  - docker build -t amit2328/web .
+
+script:
+  - mvn clean package
+
+after_success:
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push amit2328/web
 
 deploy:
   provider: elasticbeanstalk
   region: ap-south-1
-  app: Travis
-  env: Travis-env-2
+  app: Docker
+  env: Docker-env
   bucket_name: elasticbeanstalk-ap-south-1-671141137976
-  bucket_path: Travis
+  bucket_path: Docker
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
