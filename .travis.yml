@@ -1,3 +1,15 @@
 language: java
 sudo: false
 script: mvn clean package
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-south-1
+  app: Travis
+  env: Travis-env
+  bucket_name: elasticbeanstalk-ap-south-1-671141137976
+  bucket_path: Travis
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
