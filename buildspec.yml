@@ -1,0 +1,21 @@
+version: 0.2
+
+phases: 
+    install:
+        language: java: 8.0
+        jdk: openjdk8
+
+        commands:
+            - echo "installing java"
+    pre_build:
+        commands: 
+            - echo "we are in the pre build phase"
+    build:
+        commands:
+            - echo "we are in the build block"
+            - echo "we will run some tests"
+            - mvn clean package
+    post_build:
+        commands:
+            - echo "we are in the post build phase"
+            
