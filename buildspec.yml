@@ -2,8 +2,9 @@ version: 0.2
 
 phases: 
     install:
-        language: java: 8.0
-        jdk: openjdk8
+        runtime-ersions: 
+               java: 8.0
+               
 
         commands:
             - echo "installing java"
